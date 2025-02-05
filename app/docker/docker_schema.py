@@ -9,7 +9,7 @@ class ImagebuildRequest(BaseModel):
 class ImagebuildResponse(BaseModel):
     success: bool
     logs: str
-    image_tag: str
+    image_tag: list[str]
 
 
 class TagcheckRequest(BaseModel):

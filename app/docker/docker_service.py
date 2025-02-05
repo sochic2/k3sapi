@@ -37,7 +37,7 @@ class DockerService:
             return {
                     "success": False,
                     "logs" : "".join([log.get("error", "") for log in e.build_log if "error" in log]),
-                    "image_tag": ""
+                    "image_tag": []
                     }
 
     def image_push(self, image_name, tag):
