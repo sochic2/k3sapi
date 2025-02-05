@@ -1,0 +1,5 @@
+REMOTE_DOCKER_HOST = "tcp://192.168.0.233:2375"
+HARBOR_URL = "harbor.rbpk3s.com"
+HARBOR_REPO = "harbor_test"
+HARBOR_ID = "admin"
+HARBOR_PWD = "Okestro00!@#$"
