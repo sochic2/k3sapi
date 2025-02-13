@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ service_name }}
+  namespace: {{ namespace }}
+spec:
+  selector:
+    app: {{ app_name }}  # 연결할 Pod의 라벨 선택
+  ports:
+    - protocol: {{ protocol }}
+      port: {{ service_port }}       # 서비스에서 노출할 포트
+      targetPort: {{ target_port }}  # 실제 Pod에서 동작하는 포트

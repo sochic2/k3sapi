@@ -10,9 +10,9 @@ from app.docker.docker_schema import (ImagebuildRequest,
 from app.docker.docker_service import get_docker_service, DockerService
 
 router = APIRouter(
-    prefix="/docker"
+    prefix="/docker",
+    tags=["docker"]
 )
-
 
 
 @router.post("/image/exist", response_model=TagcheckResponse)
@@ -31,5 +31,3 @@ def docker_build(request: ImagebuildRequest, ds: DockerService = Depends(get_doc
 def docker_push(request: ImagepushRequest, ds: DockerService = Depends(get_docker_service)):
     response = ds.image_push(request.image_name, request.tag)
     return response
-
-
