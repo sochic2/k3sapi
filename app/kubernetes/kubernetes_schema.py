@@ -8,6 +8,8 @@ class DeploymentCreateRequest(BaseModel):
     container_name: str
     image: str
     port: int
+    cpu_request: str | None = None
+    memory: str | None = None
 
     model_config = {
         "json_schema_extra": {
@@ -20,6 +22,8 @@ class DeploymentCreateRequest(BaseModel):
                     "container_name": "k3sapi-app-container",
                     "image": "harbor.rbpk3s.com/harbor_test/buildpush-test",
                     "port": 8000,
+                    "cpu_request": "50m",
+                    "memory_request": "50Mi",
                 }
             ]
         }

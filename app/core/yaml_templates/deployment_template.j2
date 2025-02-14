@@ -18,3 +18,14 @@ spec:
         image: {{ image }}
         ports:
         - containerPort: {{ port }}
+
+        {% if cpu_request or memory_request %}
+        resources:
+          requests:
+            {% if cpu_request %}
+            cpu: {{ cpu_request }}
+            {% endif %}
+            {% if memory_request %}
+            memory: {{ memory_request }}
+            {% endif %}
+        {% endif %}
