@@ -27,17 +27,17 @@ def namespace_delete(request: NamespaceDeleteRequest, ks: KubernetesService = De
 
 @router.post("/deployment/create")
 def deployment_create(context: DeploymentCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
-    res = ks.apply_yaml(context.dict(), DEPLOYMENT_TEMPLATE_PATH)
+    res = ks.apply_yaml(context.model_dump(), DEPLOYMENT_TEMPLATE_PATH)
     return res
 
 
 @router.post("/service/create")
 def service_create(context: ServiceCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
-    res = ks.apply_yaml(context.dict(), SERVICE_TEMPLATE_PATH)
+    res = ks.apply_yaml(context.model_dump(), SERVICE_TEMPLATE_PATH)
     return res
 
 
 @router.post("/ingress/create")
 def ingress_create(context: IngressCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
-    res = ks.apply_yaml(context.dict(), INGRESS_TEMPLATE_PATH)
+    res = ks.apply_yaml(context.model_dump(), INGRESS_TEMPLATE_PATH)
     return res
