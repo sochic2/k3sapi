@@ -1,4 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+class NamespaceCreateRequest(BaseModel):
+    namespace: str
+
+
+class NamespaceDeleteRequest(BaseModel):
+    namespace: str
+
 
 class DeploymentCreateRequest(BaseModel):
     deployment_name: str
