@@ -27,6 +27,7 @@ class KubernetesService:
             self.create_namespace(context['namespace'])
 
         utils.create_from_dict(self.api_client, dict_yaml)
+        return {"success": True}
 
 
 
