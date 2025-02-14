@@ -42,17 +42,23 @@ class DockerService:
 
     def image_push(self, image_name, tag):
         build_tag = f'{HARBOR_URL}/{HARBOR_REPO}/{image_name}:{tag}'
-        push_logs = self.client.images.push(build_tag)
-        if 'error' in push_logs:
-            return {
-                "success": False,
-                "logs": push_logs
-            }
+        if self.check_dup_image_name(image_name, tag):
+            push_logs = self.client.images.push(build_tag)
+            if 'error' in push_logs:
+                return {
+                    "success": False,
+                    "logs": push_logs
+                }
 
+            else:
+                return {
+                    "success": True,
+                    "logs" : push_logs
+                }
         else:
             return {
-                "success": True,
-                "logs" : push_logs
+                "success": False,
+                "logs": f"{build_tag} is not exist"
             }
 
 

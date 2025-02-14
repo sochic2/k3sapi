@@ -22,12 +22,15 @@ class KubernetesService:
         self.v1.create_namespace(body)
 
     def apply_yaml(self, context, yaml_path):
-        dict_yaml = yaml_to_dict(context, yaml_path)
-        if not self.check_dup_namespace(context['namespace']):
-            self.create_namespace(context['namespace'])
+        try:
+            dict_yaml = yaml_to_dict(context, yaml_path)
+            if not self.check_dup_namespace(context['namespace']):
+                self.create_namespace(context['namespace'])
 
-        utils.create_from_dict(self.api_client, dict_yaml)
-        return {"success": True}
+            utils.create_from_dict(self.api_client, dict_yaml)
+            return {"success": True}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
 
 
 
