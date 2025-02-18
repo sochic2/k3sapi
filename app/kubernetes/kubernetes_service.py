@@ -23,17 +23,16 @@ class KubernetesService:
             metadata=client.V1ObjectMeta(name=namespace)
         )
         self.core.create_namespace(body)
-        return {"success": True}
+        return {"success": True, "message": f"Namespace {namespace} created"}
 
     def apply_yaml(self, context, yaml_path):
         try:
             dict_yaml = yaml_to_dict(context, yaml_path)
-            if not self.check_dup_namespace(context['namespace']):
-                self.create_namespace(context['namespace'])
-
+            namespace = context['namespace']
+            if not self.check_dup_namespace(namespace):
+                self.create_namespace(namespace)
             utils.create_from_dict(self.api_client, dict_yaml)
-
-            return {"success": True}
+            return {"success": True, "message": f"yaml applied on {namespace}"}
 
         except Exception as e:
             return {"success": False, "message": str(e)}
