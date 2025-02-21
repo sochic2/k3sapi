@@ -25,6 +25,10 @@ class KubernetesService:
         self.core.create_namespace(body)
         return {"success": True, "message": f"Namespace {namespace} created"}
 
+    def delete_namespace(self, namespace):
+        self.core.delete_namespace(namespace)
+        return {"success": True, "message": f"{namespace} deleted"}
+
     def apply_yaml(self, context, yaml_path):
         try:
             dict_yaml = yaml_to_dict(context, yaml_path)
@@ -36,11 +40,6 @@ class KubernetesService:
 
         except Exception as e:
             return {"success": False, "message": str(e)}
-
-    def delete_namespace(self, namespace):
-        self.core.delete_namespace(namespace)
-        return {"success": True, "message": f"{namespace} deleted"}
-
 
 
 def get_kubernetes_service():

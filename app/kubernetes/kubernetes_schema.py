@@ -20,7 +20,7 @@ class DeploymentCreateRequest(BaseModel):
     port: int = Field(..., description='컨테이너 포트')
     cpu_request: Optional[str] = Field(None, pattern=r"^(?:\d+m|\d+(?:\.\d+)?)$",
                                        description="cpu_request는 선택적이며, '100m', '0.5', '1', '1.5'등의 값을 허용")
-    memory_request: Optional[str] = Field(None, pattern=r"^(d+Mi|d+Gi",
+    memory_request: Optional[str] = Field(None, pattern=r"^(d+Mi|d+Gi)",
                                   description= 'memory_request는 선택정이며, 정수 + Mi or Gi의 형태로 입력')
 
     model_config = {
