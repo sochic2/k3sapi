@@ -12,32 +12,32 @@ router = APIRouter(
     tags=["kubernetes"],
 )
 
-@router.post("/namespace/create")
+@router.post("/namespace")
 def namespace_create(request: NamespaceCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
     res = ks.create_namespace(request.namespace)
     return res
 
 
-@router.delete("/namespace/delete")
+@router.delete("/namespace")
 def namespace_delete(request: NamespaceDeleteRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
     res = ks.delete_namespace(request.namespace)
     print(res)
     return res
 
 
-@router.post("/deployment/create")
+@router.post("/deployment")
 def deployment_create(context: DeploymentCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
     res = ks.apply_yaml(context.model_dump(), DEPLOYMENT_TEMPLATE_PATH)
     return res
 
 
-@router.post("/service/create")
+@router.post("/service")
 def service_create(context: ServiceCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
     res = ks.apply_yaml(context.model_dump(), SERVICE_TEMPLATE_PATH)
     return res
 
 
-@router.post("/ingress/create")
+@router.post("/ingress")
 def ingress_create(context: IngressCreateRequest, ks: KubernetesService = Depends(get_kubernetes_service)):
     res = ks.apply_yaml(context.model_dump(), INGRESS_TEMPLATE_PATH)
     return res
